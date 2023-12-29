@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gudea:wght@700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Gudea", sans-serif;
+
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80vh;
+    background: url(../assets/ahmad_small.png) no-repeat;
+    background-size: contain;
+}
+
+/* Menu style */
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 150px;
+    height: 170px;
+    position: relative;
+    bottom: 5px;
+}
+
+.logoimg{
+    width: 80px;
+    height: 80px;
+    position: relative;
+}
+
+.logoText{
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0;
+    font-family: "Black Ops One", cursive;
+    text-shadow: 1px 1px 2px white;
+}
+
+.slogan{
+    font-size: 10px;
+    font-weight: 500;
+    margin: 0;
+    text-shadow: 1px 1px 2px white;
+}
+
+/* Hamburger menu */
+.menu-container{
+    position: relative;
+    left: 630px;
+    bottom: 150px;
+    z-index: 999;
+}
+
+
+#menu-toggle {
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.hamburger-menu {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.hamburger-menu .bar {
+    width: 30px;
+    height: 5px;
+    background-color: #FFFFFF;
+    margin: 6px 0;
+    transition: 0.4s;
+    border-radius: 15px;
+}
+
+#menu-toggle:checked ~ .hamburger-menu .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+#menu-toggle:checked ~ .hamburger-menu .bar:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-toggle:checked ~ .hamburger-menu .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+#menu {
+    display: none;
+    position: fixed; /* Make the menu cover the entire screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with some transparency */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    flex-direction: column; /* Stack items vertically */
+    z-index: 1;
+
+}
+
+#menu-toggle:checked ~ #menu {
+    display: flex;
+}
+
+#menu li {
+    list-style: none; /* Remove bullet points */
+    margin: 10px 0; /* Add some vertical spacing between items */
+}
+
+#menu li a {
+    color: #fff; /* Make text white so it's visible against the black background */
+    text-decoration: none; /* Remove underline */
+}
+
+#menu li a:hover {
+    color: #da000d;
+}
+
+.red_text{
+    color: #da000d;
+    font-size: 55px;
+    margin: 0 15px;
+    text-shadow: 1px 1px 2px black;
+}
+.black_text{
+    color: white;
+    font-size: 55px;
+    margin: 0 15px;
+    text-shadow: 1px 1px 2px black;
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 40px;
+    background-color: #da000d;
+    margin: 30px 15px;
+    cursor: pointer;
+    color: white;
+    font-size: 20px;
+    border: none;
+    text-shadow: 1px 1px 2px black;
+}
+.info{
+    width: 100%;
+    height: 400px;
+    background-color: #d2d2d3;
+    margin: 0;
+}
+
+h2{
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0;
+    color: #da000d;
+    margin: 0 10px;
+    padding: 10px;
+}
+.info_text{
+    font-size: 20px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.intro{
+    width: 100%;
+    height: 400px;
+    background: url(../assets/Ahmad_2.png) no-repeat;
+}
+
+.text{
+    padding: 20px;
+}
