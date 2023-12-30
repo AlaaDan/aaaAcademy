@@ -30,13 +30,12 @@
     width: 150px;
     height: 170px;
     position: relative;
-    bottom: 5px;
-    right: 25px;
+    bottom: 3%;
+    right: 6%;
 }
 
 .logoimg{
-    width: 80px;
-    height: 80px;
+    width: 60px;
     position: relative;
 }
 
