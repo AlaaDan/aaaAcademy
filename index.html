@@ -83,20 +83,29 @@
             </ol>
             <!-- <button class="button"></button> -->
         </article>
-        <article class="contact">
+        <form class="form" action="submit">
             <h2>Contact US</h2>
-            <form class="form" action="submit">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" >
-                <label for="message">Message</label>
-                <textarea name="message" id="message" cols="30" rows="10"></textarea>
-                <button class="button">Submit</button>
-            </form>
-            <button class="button">Find out more</button>
+            <div class="input-group">
+                <input class="input" required type="text" id="name">
+                <label class="label" for="name">Name</label>
+    
+            </div>
+            <div class="input-group">
+                <input class="input" required type="text" id="email">
+                <label class="label" for="email">Email</label>
+            </div>
+    
+            <div class="input-group-big">
+                <!-- <input class="input-big" required type="text" id="msg"> -->
+                <textarea class="input-big" required type="text" id="msg" name="msg" id="" cols="30" rows="10"></textarea>
+                <label class="label" for="msg">Write your message</label>
+            </div>
+            <button class="button">Submit</button>
+        </form>    
+
+
     </main>
-    <footer>
+    <footer class="footer">
         <p>AAA Boxing &copy; 2021</p>
         <nav>
             <ul>
