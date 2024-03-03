@@ -1,0 +1,99 @@
+service: aaaAcademy
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  profile: serverlessUser
+  region: eu-north-1
+  iam:
+    role: arn:aws:iam::990371472798:role/course-role
+
+plugins:
+  - serverless-webpack
+
+package:
+  individually: true
+
+functions:
+  getAllSessions:
+    handler: functions/Session/getAllSessions.handler
+    events:
+      - httpApi:
+          path: '/api/session'
+          method: GET
+  bookSession:
+    handler: functions/Session/bookSession.handler
+    events:
+      - httpApi:
+          path: '/api/session'
+          method: POST
+  deleteSession:
+    handler: functions/Session/deleteSession.handler
+    events:
+      - httpApi:
+          path: '/api/session/{sessionID}'
+          method: DELETE
+  getMySession:
+    handler: functions/Session/getMySession.handler
+    events:
+      - httpApi:
+          path: '/api/session/{sessionID}'
+          method: GET
+  editMySession:
+    handler: functions/Session/editMySession.handler
+    events:
+      - httpApi:
+          path: '/api/session/{sessionID}'
+          method: POST
+  signup:
+    handler: functions/User/signup.handler
+    events:
+      - httpApi:
+          path: '/api/auth/signup'
+          method: POST
+  login:
+    handler: functions/User/login.handler
+    events:
+      - httpApi:
+          path: '/api/auth/login'
+          method: POST
+  changePassword:
+    handler: functions/User/changePass.handler
+    events:
+      - httpApi:
+          path: '/api/auth/changePassword'
+          method: POST
+  changeInfo:
+    handler: functions/User/changeInfo.handler
+    events:
+      - httpApi:
+          path: '/api/auth/changeInfo'
+          method: POST
+  
+resources:
+  Resources:
+    quiztopiaDB:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: bookingDB
+        AttributeDefinitions:
+          - AttributeName: sessionID
+            AttributeType: S
+        KeySchema:
+          - AttributeName: sessionID
+            KeyType: HASH # Partition key/Primary key
+
+        BillingMode: PAY_PER_REQUEST
+    userDB:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: academyUserDB
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH # Partition key/Primary key
+
+        BillingMode: PAY_PER_REQUEST

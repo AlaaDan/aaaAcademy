@@ -1,0 +1,32 @@
+{
+  "name": "bonzai",
+  "version": "1.0.0",
+  "description": "Quiztopia-API Exam",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Alaa Aldandachi",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.122",
+    "@types/aws-sdk": "^2.7.0",
+    "@types/bcryptjs": "^2.4.4",
+    "@types/jsonwebtoken": "^9.0.3",
+    "@types/node": "^20.6.5",
+    "serverless-esbuild": "^1.48.3",
+    "serverless-webpack": "^5.13.0"
+  },
+  "dependencies": {
+    "@middy/core": "^4.6.4",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1463.0",
+    "bcryptjs": "^2.4.3",
+    "dayjs": "^1.11.9",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "middy": "^0.36.0",
+    "nanoid": "^5.0.1"
+  }
+}
