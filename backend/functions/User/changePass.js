@@ -9,7 +9,7 @@ const { validateToken } = require('../../middleware/auth')
 // Function to check if the password and re-typepassword match
 function checkPassMatch(newPassword, retypePassword){
     if(newPassword !== retypePassword){
-        throw new Error('Passwords do not match, please try again.')
+        return true
     }
 }
 
