@@ -4,13 +4,15 @@ import { nanoid } from "nanoid"
 const { sendResponse, sendError } = require('../../responses/index')
 import { validateUser } from "../../middleware/validation"
 const middy = require('@middy/core')
+const { checkPendingUser } = require('./approveUser')
+
 
 export async function checkUser(userName){
     const userInDB = await db.scan({
         TableName: 'academyUserDB',
         FilterExpression: 'userName = :userName',
         ExpressionAttributeValues: {
-            ':userName': userName
+            ':userName': userName.toLowerCase()
         }
     }).promise()
     return userInDB
@@ -18,8 +20,9 @@ export async function checkUser(userName){
 
 export async function encryptPass(pass, userName){
     const userInDB = await checkUser(userName, pass)
+    const userInPendingDB = await checkPendingUser(userName)
     // If the user dosen't exist, encrypt the password
-    if(userInDB.Items.length === 0){
+    if(userInDB.Items.length === 0 && userInPendingDB.Items.length === 0){
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(pass, salt);
         return hash
@@ -35,10 +38,12 @@ export async function addUser(firstName, lastName, userID, userName, encryptedPa
         lastName: lastName,
         userName: userName.toLowerCase(),
         password: encryptedPass,
-        email: email
+        email: email,
+        approved: false,
+        admin: false
     }
     await db.put({
-        TableName: 'academyUserDB',
+        TableName: 'pendingUserDB',
         Item: newUser
     }).promise()
 
