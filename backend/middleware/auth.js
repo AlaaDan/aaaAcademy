@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-export function createToken (userName, userID){
-    const token = jwt.sign({userName, userID}, "1a1b1c", {expiresIn: 1000 })
+export function createToken (userName, userID, admin){
+    const token = jwt.sign({userName, userID, admin}, "1a1b1c", {expiresIn: 1000 })
     return token
 };
 
@@ -15,6 +15,7 @@ export const validateToken = {
                 const decoded =  jwt.verify(token, "1a1b1c")
                 request.event.userName = decoded.userName
                 request.event.userID = decoded.userID
+                request.event.admin = decoded.admin
                 return request.response
             }
         } catch (err) {

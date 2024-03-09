@@ -76,6 +76,11 @@ const validateInfoChange = Joi.object({
     email: Joi.string().email()
 })
 
+const validateApproveUser = Joi.object({
+    userName: Joi.string().required()
+})
+
+export const validateApprove = validate(validateApproveUser)
 export const validateInfo = validate(validateInfoChange)
 export const validatePassChange = validate(passChangeSchema)
 export const validateLogin = validate(loginSchema)

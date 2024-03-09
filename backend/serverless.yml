@@ -76,13 +76,19 @@ functions:
       - httpApi:
           path: '/api/auth/logout'
           method: POST
+  approveUser:
+    handler: functions/User/approveUser.handler
+    events:
+      - httpApi:
+          path: '/api/User/approveUser'
+          method: POST
   
 resources:
   Resources:
-    quiztopiaDB:
+    aaaAcademyDB:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: bookingDB
+        TableName: sessionsDB
         AttributeDefinitions:
           - AttributeName: sessionID
             AttributeType: S
@@ -91,10 +97,24 @@ resources:
             KeyType: HASH # Partition key/Primary key
 
         BillingMode: PAY_PER_REQUEST
+
     userDB:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: academyUserDB
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH # Partition key/Primary key
+
+        BillingMode: PAY_PER_REQUEST
+
+    pendingUserDB:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: pendingUserDB
         AttributeDefinitions:
           - AttributeName: PK
             AttributeType: S
