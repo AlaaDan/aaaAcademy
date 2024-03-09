@@ -28,10 +28,12 @@ export async function encryptPass(pass, userName){
     }
 }
 
-export async function addUser(userID, userName, encryptedPass, email){
+export async function addUser(firstName, lastName, userID, userName, encryptedPass, email){
     const newUser = {
         PK: userID,
-        userName: userName,
+        firstName: firstName,
+        lastName: lastName,
+        userName: userName.toLowerCase(),
         password: encryptedPass,
         email: email
     }
@@ -46,7 +48,7 @@ export async function addUser(userID, userName, encryptedPass, email){
 exports.handler = middy () .handler(async (event, context) => {
     try{
         const body = JSON.parse(event.body)
-        const { userName, password, email } = body
+        const { firstName, lastName, userName, password, email } = body
         const userID = nanoid(8)
         // Check if the user is in the database, if they are return a msg saying the user already exists
         const userInDB = await checkUser(userName, password)
@@ -63,7 +65,7 @@ exports.handler = middy () .handler(async (event, context) => {
         const encryptedPass = await encryptPass(password, userName)
 
         // Add the user to the database
-        const newUser = await addUser(userID, userName, encryptedPass, email)
+        const newUser = await addUser(firstName, lastName, userID, userName, encryptedPass, email)
 
         return sendResponse(200, {sucess: true, UserInfo: newUser})
     } catch (err) {
