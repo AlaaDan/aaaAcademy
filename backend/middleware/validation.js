@@ -22,6 +22,18 @@ const validate = (schema) => ({
 })
 
 const userSchema = Joi.object({
+    firstName: Joi.string().min(3).max(20).required().messages({
+        'string.empty': 'First name cannot be empty',
+        'string.min': 'First name should have a minimum length of 3',
+        'string.max': 'First name should have a maximum length of 20',
+        'any.required': 'First name is a required field'
+    }),
+    lastName: Joi.string().min(3).max(20).required().messages({
+        'string.empty': 'Last name cannot be empty',
+        'string.min': 'Last name should have a minimum length of 3',
+        'string.max': 'Last name should have a maximum length of 20',
+        'any.required': 'Last name is a required field'
+    }),
     userName: Joi.string().min(3).max(20).required().messages({
         'string.empty': 'Username cannot be empty',
         'string.min': 'Username should have a minimum length of 3',
@@ -58,6 +70,13 @@ const passChangeSchema = Joi.object({
     retypePassword: Joi.string().required()
 })
 
+const validateInfoChange = Joi.object({
+    firstName: Joi.string().min(3).max(20),
+    lastName: Joi.string().min(3).max(20),
+    email: Joi.string().email()
+})
+
+export const validateInfo = validate(validateInfoChange)
 export const validatePassChange = validate(passChangeSchema)
 export const validateLogin = validate(loginSchema)
 export const validateUser = validate(userSchema)

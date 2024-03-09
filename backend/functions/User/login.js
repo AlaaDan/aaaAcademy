@@ -10,7 +10,7 @@ import { checkUser } from './signup'
 
 export async function login(userName, password){
 
-    const userInDB = await checkUser(userName, password)
+    const userInDB = await checkUser(userName.toLowerCase(), password)
     
     if(userInDB.Items.length === 0){
         throw new Error('User not found.')

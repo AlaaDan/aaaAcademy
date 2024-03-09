@@ -70,6 +70,12 @@ functions:
       - httpApi:
           path: '/api/auth/changeInfo'
           method: POST
+  logout:
+    handler: functions/User/logout.handler
+    events:
+      - httpApi:
+          path: '/api/auth/logout'
+          method: POST
   
 resources:
   Resources:
