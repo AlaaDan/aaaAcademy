@@ -80,6 +80,15 @@ const validateApproveUser = Joi.object({
     userName: Joi.string().required()
 })
 
+const validateAddSession = Joi.object({
+    date: Joi.string().required(),
+    time: Joi.string().required(),
+    booked: Joi.boolean().required(),
+    bookedBy: Joi.string().required()
+})
+
+
+export const validateSession = validate(validateAddSession)
 export const validateApprove = validate(validateApproveUser)
 export const validateInfo = validate(validateInfoChange)
 export const validatePassChange = validate(passChangeSchema)

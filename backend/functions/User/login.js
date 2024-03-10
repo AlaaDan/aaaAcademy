@@ -49,7 +49,15 @@ exports.handler = middy() .handler(async (event)=>{
         const token = createToken(user.userName, user.PK, user.admin)
         console.log('token: ', token)
 
-        return sendResponse(200, {sucess: true, msg: "Successfully logged in", token: token, user: user})
+        return sendResponse(200, {sucess: true, 
+            msg: "Successfully logged in", 
+            UserInfo: {
+                userName: user.userName,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                userID: user.PK
+            }, token: token})
     } catch (err) {
         console.error(err)
         return sendError(400, {msg: err.message})
