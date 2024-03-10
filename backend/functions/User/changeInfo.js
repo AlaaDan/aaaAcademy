@@ -47,7 +47,14 @@ exports.handler =  middy() .handler(async (event)=>{
             return sendError(400, {msg: event.error})
         }
         const user = await changeUserInfo(event, firstName, lastName, email)
-        return sendResponse(200, {msg: 'User information updated successfully', user})
+        return sendResponse(200, {
+            msg: 'User information updated successfully', 
+            UserInfo:{
+                firstName: user.Items[0].firstName,
+                lastName: user.Items[0].lastName,
+                email: user.Items[0].email
+                
+            }})
     }catch(err){
         return sendError(400, {msg: err.message})
     }

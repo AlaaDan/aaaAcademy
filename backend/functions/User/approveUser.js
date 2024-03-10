@@ -51,7 +51,10 @@ exports.handler = middy() .handler(async (event)=>{
             const body = JSON.parse(event.body)
             const { userName } = body
             const user = await approveUser(event, userName)
-            return sendResponse(200, {success: true, msg: 'User approved', user: user})
+            return sendResponse(200, {success: true, 
+                msg: 'User approved', 
+                user: user.userName, 
+                userID: user.PK})
         } else {
             throw new Error('You are not authorized to approve users.')
         }

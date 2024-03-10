@@ -10,7 +10,7 @@ export const validateToken = {
         try{
             const token = request.event.headers.authorization.replace('Bearer ', '').trim()
             if (!token) {
-                return('No token provided')
+                return({error: 'No token provided'})
             } else {
                 const decoded =  jwt.verify(token, "1a1b1c")
                 request.event.userName = decoded.userName
@@ -19,8 +19,8 @@ export const validateToken = {
                 return request.response
             }
         } catch (err) {
-            request.event.error = {msg: 'You are not looged in or your token has expired. Please log in and try again.'}
-            return request.response
+            request.event.error = {msg: 'You are not loged in or your token has expired. Please log in and try again.'}
+            return {error: request.event.error.msg }
         }
     }
 }

@@ -61,7 +61,8 @@ exports.handler = middy() .handler(async (event)=>{
         }
         // Validate the user
         const user = await handleChangePasswordRequest(event, password, newPassword, retypePassword)
-        return sendResponse(200, {sucess: true, user: user, msg: "Password changed successfully."})
+        return sendResponse(200, {sucess: true, 
+            msg: "Password changed successfully."})
     } catch (err) {
         console.error(err)
         return sendError(400,{msg: JSON.parse(err.body).msg})

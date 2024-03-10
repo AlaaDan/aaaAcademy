@@ -26,8 +26,8 @@ functions:
     handler: functions/Session/bookSession.handler
     events:
       - httpApi:
-          path: '/api/session'
-          method: POST
+          path: '/api/session/{sessionID}'
+          method: PUT
   deleteSession:
     handler: functions/Session/deleteSession.handler
     events:
@@ -46,6 +46,12 @@ functions:
       - httpApi:
           path: '/api/session/{sessionID}'
           method: POST
+  addSessions:
+    handler: functions/Session/addSessions.handler
+    events:
+      - httpApi:
+          path: '/api/session/add'
+          method: POST
   signup:
     handler: functions/User/signup.handler
     events:
@@ -63,13 +69,13 @@ functions:
     events:
       - httpApi:
           path: '/api/auth/changePassword'
-          method: POST
+          method: PUT
   changeInfo:
     handler: functions/User/changeInfo.handler
     events:
       - httpApi:
           path: '/api/auth/changeInfo'
-          method: POST
+          method: PUT
   logout:
     handler: functions/User/logout.handler
     events:
