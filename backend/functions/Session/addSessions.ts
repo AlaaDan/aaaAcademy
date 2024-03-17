@@ -1,12 +1,12 @@
-const { db } = require('../../services/db')
-const { sendResponse, sendError } = require("../../responses");
-const middy = require("@middy/core");
-const { validateSession } = require("../../middleware/validation");
-const { validateToken } = require("../../middleware/auth");
-const { nanoid } = require("nanoid");
+import { db } from '../../services/db'
+import { sendResponse, sendError } from "../../responses";
+import middy from "@middy/core";
+import { validateSession } from "../../middleware/validation";
+import { validateToken } from "../../middleware/auth";
+import { nanoid } from "nanoid";
 
 // Check if the date and time already exists in the DB
-export async function checkSession(date, time){
+export async function checkSession(date: string, time: string){
     const sessionInDB = await db.scan({
         TableName: 'sessionsDB',
         FilterExpression: '#date = :date AND #time = :time',
@@ -22,13 +22,13 @@ export async function checkSession(date, time){
     return sessionInDB
 } 
 
-export async function addSession(date, time, sessionID, booked, bookedby){
+export async function addSession(date: string, time: string, sessionID: string, booked: string, bookedby: string ){
     // Check if the date is in the past
     const sessionDate = new Date(date)
     const currentDate = new Date()
     const sessionInDB = await checkSession(date, time)
     //console.log("Session in DB", sessionInDB)
-    if (sessionInDB.Items.length !== 0){
+    if (sessionInDB.Items?.length !== 0){
         throw new Error('The date and time you have entered already exists. Please enter a valid date and time.')
     }
     if(sessionDate < currentDate){
@@ -57,7 +57,7 @@ export async function addSession(date, time, sessionID, booked, bookedby){
 }
 
 
-exports.handler = middy (async (event) => {
+exports.handler = middy (async (event: any) => {
     try{
         const isAdmin = event.admin
         //console.log('isAdmin: ', isAdmin)

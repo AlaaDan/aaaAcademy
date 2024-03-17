@@ -1,11 +1,11 @@
-const middy = require('@middy/core')
-const { sendError, sendResponse } = require('../../responses/index')
-const { db } = require('../../services/db')
-const { validateApprove } = require('../../middleware/validation')
-const { validateToken } = require('../../middleware/auth')
+import middy from '@middy/core'
+import { sendError, sendResponse } from '../../responses/index'
+import { db } from '../../services/db'
+import { validateApprove } from '../../middleware/validation'
+import { validateToken } from '../../middleware/auth'
 
 
-export async function checkPendingUser(userName){
+export async function checkPendingUser(userName: string){
     const userInDB = await db.scan({
         TableName: 'pendingUserDB',
         FilterExpression: 'userName = :userName',
@@ -17,13 +17,13 @@ export async function checkPendingUser(userName){
 }
 
 
-export async function approveUser(event, userName){
+export async function approveUser(event: any, userName: string){
     // Check the user in the pending db and then move it to the user db
     const userInDB = await checkPendingUser(userName)
-    if(userInDB.Items.length === 0){
+    const user = userInDB.Items?.[0]
+    if(!user){
         throw new Error('User not found, please try again.')
     }
-    const user = userInDB.Items[0]
     user.approved = true
     // Add the user to the user db
     await db.put({
@@ -43,10 +43,10 @@ export async function approveUser(event, userName){
 
 
 // Function to handle the request if the user is an admin
-exports.handler = middy() .handler(async (event)=>{
+exports.handler = middy() .handler(async (event: any)=>{
     try{
         const isAdmin = event.admin
-        console.log('isAdmin: ', isAdmin)
+        //console.log('isAdmin: ', isAdmin)
         if(isAdmin){
             const body = JSON.parse(event.body)
             const { userName } = body
@@ -60,7 +60,7 @@ exports.handler = middy() .handler(async (event)=>{
         }
     } catch (err) {
         console.error(err)
-        return sendError(400, {msg: err.message})
+        return sendError(400, err.message)
     }
 })
 .use(validateToken)

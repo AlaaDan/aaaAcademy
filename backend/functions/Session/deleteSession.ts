@@ -1,17 +1,17 @@
-const { db } = require('../../services/db')
-const { sendResponse, sendError } = require("../../responses");
-const middy = require("@middy/core");
-const { validateToken } = require("../../middleware/auth");
-const { getMySession } = require('./getMySession')
+import { db } from '../../services/db'
+import { sendResponse, sendError } from "../../responses";
+import middy from "@middy/core";
+import { validateToken } from "../../middleware/auth";
+import { getMySession } from './getMySession'
 
-export async function deleteSession(sessionID){
+export async function deleteSession(sessionID: string){
     try {
         const currentSession = await getMySession(sessionID)
-        const currentSessionDate = new Date(currentSession.Items[0].date + ' ' + currentSession.Items[0].time);
+        const currentSessionDate = new Date(currentSession.Items?.[0].date + ' ' + currentSession.Items?.[0].time);
         if (currentSessionDate < new Date()) {
             throw new Error('Current session is in the past and cannot be deleted');
         }
-        if (sessionID === currentSession.Items[0].sessionID && currentSession.Items[0].booked === false) {
+        if (sessionID === currentSession.Items?.[0].sessionID && currentSession.Items[0].booked === false) {
 
             const session = await db.delete({
                 TableName: 'sessionsDB',
@@ -31,7 +31,7 @@ export async function deleteSession(sessionID){
 }
 
 // If the user is admin, they can delete any session, otherwise they can only delete their own sessions
-exports.handler = middy(async (event) => {
+exports.handler = middy(async (event: any) => {
     try {
         const sessionID = event.pathParameters.sessionID
         const isAdmin = event.admin

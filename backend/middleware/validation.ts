@@ -1,25 +1,32 @@
-const Joi = require('joi');
+import * as Joi from 'joi';
 
-const validate = (schema) => ({
-    before: async (request) =>{
-        try{
-            const body = JSON.parse(request.event.body)
-            const { error } = schema.validate(body)
-            if(error){
-                return{
-                    statusCode: 400,
-                    body: JSON.stringify({msg: error.details[0].message}),
-                    msg: "Something went wrong"
-                }
-            }
-            return request.response
+interface Request {
+  event: {
+    body: string;
+    error?: string;
+  };
+  response: any;
+}
 
-        } catch (err) {
-            request.event.error = "401"
-            return request.response
-        }
+const validate = (schema: Joi.ObjectSchema) => ({
+  before: async (request: Request) => {
+    try {
+      const body = JSON.parse(request.event.body);
+      const { error } = schema.validate(body);
+      if (error) {
+        return {
+          statusCode: 400,
+          body: JSON.stringify({ msg: error.details[0].message }),
+          msg: "Something went wrong",
+        };
+      }
+      return request.response;
+    } catch (err) {
+      request.event.error = "401";
+      return request.response;
     }
-})
+  },
+});
 
 const userSchema = Joi.object({
     firstName: Joi.string().min(3).max(20).required().messages({
