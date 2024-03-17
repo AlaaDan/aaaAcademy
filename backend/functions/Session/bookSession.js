@@ -47,12 +47,9 @@ export async function bookSession(sessionID, bookedBy, userID) {
 exports.handler = middy(async (event) => {
     try {
         const sessionID = event.pathParameters.sessionID;
-        //console.log('Session ID:', sessionID)
-        // Get the username from the token
+        // Ftech the username from the token
         const userName = event.userName;
         const userID = event.userID;
-        // console.log("event", event)
-        // console.log('Username:', userName, "UserID:", userID)
         const sessionDetails = await bookSession(sessionID, userName, userID);
         return sendResponse(200, sessionDetails);
     } catch (error) {
