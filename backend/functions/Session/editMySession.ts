@@ -1,11 +1,17 @@
-const { db } = require('../../services/db')
-const { sendResponse, sendError } = require("../../responses");
-const middy = require("@middy/core");
-const { validateToken } = require("../../middleware/auth");
-const { getMySession } = require('./getMySession')
-const { validateEdit } = require('../../middleware/validation')
+import { db } from '../../services/db'
+import { sendResponse, sendError } from "../../responses";
+import middy from "@middy/core";
+import { validateToken } from "../../middleware/auth";
+import { getMySession } from './getMySession'
+import { validateEdit } from '../../middleware/validation'
 
-export async function checkNewSession(session){
+interface Session {
+    sessionID: string;
+    date: string;
+    time: string;
+}
+
+export async function checkNewSession(session: Session){
     // Check if the session exists using the date and time of the session
     try {
         const sessionDate = session.date
@@ -25,8 +31,8 @@ export async function checkNewSession(session){
         //console.log("Session in DB ", sessionInDB.Items[0])
         
         // if the session exists return it otherwise return an error
-        if (sessionInDB.Items.length != 0) {
-            return sessionInDB.Items[0]
+        if (sessionInDB.Items?.length != 0) {
+            return sessionInDB.Items?.[0]
         } else {
             throw new Error('Session not found')
         }   
@@ -36,13 +42,13 @@ export async function checkNewSession(session){
     } 
 }
 
-export async function editMySession(session){
+export async function editMySession(session: Session){
     try {
         // Fetch current session details from the DB
         const currentSession = await getMySession(session.sessionID)
 
         // Check if the current session is in the past
-        const currentSessionDate = new Date(currentSession.Items[0].date + ' ' + currentSession.Items[0].time);
+        const currentSessionDate = new Date(currentSession.Items?.[0].date + ' ' + currentSession.Items?.[0].time);
         if (currentSessionDate < new Date()) {
             throw new Error('Current session is in the past and cannot be changed');
         }
@@ -54,16 +60,21 @@ export async function editMySession(session){
         }
 
         // Check if the current session is booked, if it is then check if the new session is booked and if not then update the sessions
-        if (currentSession.Items[0].booked === true) {
-            const newSession = await checkNewSession(session)
+        if (currentSession.Items?.[0].booked === true) {
+            let newSession;
+            try {
+                newSession = await checkNewSession(session)
+            } catch (error) {
+                throw new Error('No session found');
+            }
 
             // Check if the new session is in the past
-            const newSessionDate = new Date(newSession.date + ' ' + newSession.time);
+            const newSessionDate = new Date(newSession?.date + ' ' + newSession?.time);
             if (newSessionDate < new Date()) {
                 throw new Error('New session is in the past and cannot be booked');
             }
             
-            if (newSession.booked === false) {
+            if (newSession?.booked === false) {
                 const updatedNewSession = await db.update({
                     TableName: 'sessionsDB',
                     Key: {
@@ -100,7 +111,7 @@ export async function editMySession(session){
     }
 }
 
-exports.handler = middy (async (event) => {
+exports.handler = middy (async (event: any) => {
     try{
         const body = JSON.parse(event.body)
         const session = {

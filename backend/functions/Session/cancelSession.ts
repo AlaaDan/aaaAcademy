@@ -1,14 +1,14 @@
-const { db } = require('../../services/db')
-const { sendResponse, sendError } = require("../../responses");
-const middy = require("@middy/core");
-const { validateToken } = require("../../middleware/auth");
-const { getMySession } = require('./getMySession')
+import { db } from '../../services/db'
+import { sendResponse, sendError } from "../../responses";
+import middy from "@middy/core";
+import { validateToken } from "../../middleware/auth";
+import { getMySession } from './getMySession'
 
 // function to check if the session in the DB using get my session, then it checks if  the date and time for the session not in the past, then check if the sesssion time is not less than 24 h then we cancle it 
-export async function cancelSession(sessionID){
+export async function cancelSession(sessionID: string){
     try {
         const currentSession = await getMySession(sessionID)
-        const currentSessionDate = new Date(currentSession.Items[0].date + ' ' + currentSession.Items[0].time);
+        const currentSessionDate = new Date(currentSession.Items?.[0].date + ' ' + currentSession.Items?.[0].time);
         if (currentSessionDate < new Date()) {
             throw new Error('Current session is in the past and cannot be cancelled');
         }
@@ -16,7 +16,7 @@ export async function cancelSession(sessionID){
         if (timeDifference < 24 * 60 * 60 * 1000) {
             throw new Error('Current session is less than 24 hours away and cannot be cancelled');
         }
-        if (sessionID === currentSession.Items[0].sessionID) {
+        if (sessionID === currentSession.Items?.[0].sessionID) {
             const session = await db.update({
                 TableName: 'sessionsDB',
                 Key: {
@@ -37,7 +37,7 @@ export async function cancelSession(sessionID){
     }
 }
 
-exports.handler = middy(async (event) => {
+exports.handler = middy(async (event: any) => {
     try {
         const sessionID = event.pathParameters.sessionID
         const session = await cancelSession(sessionID)

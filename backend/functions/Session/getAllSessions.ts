@@ -1,7 +1,7 @@
-const { db } = require('../../services/db')
-const { sendResponse, sendError } = require("../../responses");
-const middy = require("@middy/core");
-const { validateToken } = require("../../middleware/auth");
+import { db } from '../../services/db'
+import { sendResponse, sendError } from "../../responses";
+import middy from "@middy/core";
+import { validateToken } from "../../middleware/auth";
 
 
 export async function getAllSessions(){
@@ -12,7 +12,7 @@ export async function getAllSessions(){
 }
 
 
-exports.handler = middy (async (event) => {
+exports.handler = middy (async (event: any) => {
     try{
         const sessions = await getAllSessions()
         return sendResponse(200, sessions)

@@ -1,10 +1,10 @@
-const { db } = require('../../services/db')
-const { sendResponse, sendError } = require("../../responses");
-const middy = require("@middy/core");
-const { validateToken } = require("../../middleware/auth");
+import { db } from '../../services/db'
+import { sendResponse, sendError } from "../../responses";
+import middy from "@middy/core";
+import { validateToken } from "../../middleware/auth";
 
 // Function to get all the user sessions from the DB 
-export async function getAllMySessions(userID){
+export async function getAllMySessions(userID: string){
     try {
         const usersSessions = await db.scan({
             TableName: 'sessionsDB',
@@ -14,7 +14,7 @@ export async function getAllMySessions(userID){
             }
         }).promise()
         //console.log("Users Sessions ", usersSessions)
-        if (usersSessions.Items.length === 0) {
+        if (usersSessions.Items?.length === 0) {
             return { message: 'No sessions found' }
         }
         return usersSessions
@@ -24,12 +24,16 @@ export async function getAllMySessions(userID){
     }
 }
 
-exports.handler = middy (async (event) => {
+exports.handler = middy (async (event: any) => {
     try{
         const userID  = event.userID
         //console.log("User ID ", userID)
         const sessions = await getAllMySessions(userID)
-        return sendResponse(200, sessions.Items)
+        if ("Items" in sessions) {
+            return sendResponse(200, sessions.Items)
+        } else {
+            return sendResponse(200, sessions)
+        }
     } catch (error) {
         return sendError(404, error.message)
     }
