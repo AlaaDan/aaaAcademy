@@ -28,30 +28,42 @@ functions:
       - httpApi:
           path: '/api/session/{sessionID}'
           method: PUT
-  deleteSession:
-    handler: functions/Session/deleteSession.handler
+  cancelSession:
+    handler: functions/Session/cancelSession.handler
     events:
       - httpApi:
-          path: '/api/session/{sessionID}'
-          method: DELETE
+          path: '/api/session/cancel/{sessionID}'
+          method: PUT
   getMySession:
     handler: functions/Session/getMySession.handler
     events:
       - httpApi:
           path: '/api/session/{sessionID}'
           method: GET
+  getAllMySessions:
+    handler: functions/Session/getAllMySessions.handler
+    events:
+      - httpApi:
+          path: '/api/session/mySessions'
+          method: GET
   editMySession:
     handler: functions/Session/editMySession.handler
     events:
       - httpApi:
-          path: '/api/session/{sessionID}'
-          method: POST
+          path: '/api/session/edit'
+          method: PUT
   addSessions:
     handler: functions/Session/addSessions.handler
     events:
       - httpApi:
           path: '/api/session/add'
           method: POST
+  deleteSession:
+    handler: functions/Session/deleteSession.handler
+    events:
+      - httpApi:
+          path: '/api/session/delete/{sessionID}'
+          method: DELETE
   signup:
     handler: functions/User/signup.handler
     events:

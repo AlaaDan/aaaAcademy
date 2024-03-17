@@ -60,12 +60,12 @@ export async function addSession(date, time, sessionID, booked, bookedby){
 exports.handler = middy (async (event) => {
     try{
         const isAdmin = event.admin
-        console.log('isAdmin: ', isAdmin)
+        //console.log('isAdmin: ', isAdmin)
         if(isAdmin){
             const body = JSON.parse(event.body)
-            const { date, time, booked, bookedby } = body
+            const { date, time, booked, bookedBy } = body
             const sessionID = nanoid(8)
-            const session = await addSession(date, time, sessionID, booked, bookedby)
+            const session = await addSession(date, time, sessionID, booked, bookedBy)
             return sendResponse(200, {success: true, msg: 'Session added', Session: session})
 
         } else{

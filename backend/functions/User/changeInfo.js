@@ -33,6 +33,7 @@ export async function changeUserInfo(event, firstName, lastName, email) {
             ':l': lastName,
             ':e': email
         }
+        
     }).promise()
     // Fetch the update user and return it
     const updatedUser = await checkUser(userName)
