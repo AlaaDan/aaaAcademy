@@ -76,7 +76,8 @@ exports.handler = middy() .handler(async (event: Event)=>{
             msg: "Password changed successfully."})
     } catch (err) {
         console.error(err)
-        return sendError(400,JSON.parse(err.body).msg)
+        //return sendError(400,JSON.parse(err.body).msg)
+        return sendError(400, err.body)
     }
 })
 .use(validateToken)

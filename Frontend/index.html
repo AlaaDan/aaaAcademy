@@ -3,122 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAA Boxing</title>
-    <link rel="stylesheet" href="style/styles.css">
-</head>
-<body>
-    
-    <header class="header">
-        <nav>
-            <div class="navbar">
-              <div class="container nav-container">
-                  <input class="checkbox" type="checkbox" name="" id="" />
-                  <div class="hamburger-lines">
-                    <span class="line line1"></span>
-                    <span class="line line2"></span>
-                    <span class="line line3"></span>
-                  </div>  
-                <div class="logo">
-                    <img class="logoimg" src="/assets/hand.jpeg" alt="Muscle">
-                    <p class="logoText" >Ahmad</p>
-                    <p class="logoText" >Othman</p>
-                    <p class="logoText slogan" >Boxing Trainer</p>
-                </div>
-                <div class="menu-items">
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Contact</a></li>
-                  <li><a href="#">Login</a></li>
-                  <li><a href="#">Book a session</a></li>
-                </div>
-              </div>
-            </div>
-          </nav>
-        <aside class="booking">
-            <h1 class="red_text">LEARN TO BOX</h1>
-            <span class="text"> & GET FIT WHILE </span>
-            <br>
-            <span class="text">HAVING FUN WITH US</span>
-            <br>
-            <button class="button">Book A Session</button>
-        </aside>
-    </header>
-    <main>
-        <article class="info">
-            <h2 class="red_text">Achieve The Best Results Of Your Life</h2>
-            <p class="info_text">AAA Boxing is a boxing gym located in the heart of the city.
-                 We offer a wide range of boxing classes for all ages and skill levels.</p>
-                 <br> 
-                 <p class="info_text"> Whether you are looking to get in shape, learn self-defense, or compete at the amateur or professional level, 
-                 we have something for you! Our trainers are experienced professionals who will help you reach your goals. 
-                 Come train with us today!</p>
-        </article>
-        <article class="intro">
-            <h2 class="red_text">INTRODUCTION</h2>
-            <p class="text info_text">Head coach Ahmad Othman, provides high quality perosnal and boxing
-                traning. Certified coach, and Lebanon boxing champion with over 18 years
-                of experience in boxing and fitness. Ahmad has trained clients all
-                over the world, from Lebanon to the United States</p>
-        <button class="button">FIND OUT MORE</button>
-        </article>
-        <article class="classes">
-            <h2 class="red_text">Classes</h2>
-            <p class="info_text">AAA Boxing offers a variety of classes for all ages and skill levels. 
-                Whether you are looking to get in shape, learn self-defense, or compete at the amateur or professional level, 
-                we have something for you! 
-                Come train with us today!</p>
-            <button class="button">Find out more</button>
-        </article>
-        <article class="whyBox">
-            <h2 class="red_text">Why Boxing?</h2>
-            <ol>
-                <li>Enhanced cardivascular health</li>
-                <li>Improved total-body strength</li>
-                <li>Better hand-eye coordination</li>
-                <li>Decreased stress</li>
-                <li>Improved body composition</li>
-                <li>Increased self-esteem</li>
-                <li>Improved mental health</li>
-                <li>Improved sleep</li>
-            </ol>
-            <!-- <button class="button"></button> -->
-        </article>
-        <form class="form" action="submit">
-            <h2>Contact US</h2>
-            <div class="input-group">
-                <input class="input" required type="text" id="name">
-                <label class="label" for="name">Name</label>
-    
-            </div>
-            <div class="input-group">
-                <input class="input" required type="text" id="email">
-                <label class="label" for="email">Email</label>
-            </div>
-    
-            <div class="input-group-big">
-                <!-- <input class="input-big" required type="text" id="msg"> -->
-                <textarea class="input-big" required type="text" id="msg" name="msg" id="" cols="30" rows="10"></textarea>
-                <label class="label" for="msg">Write your message</label>
-            </div>
-            <button class="button">Submit</button>
-        </form>    
+    <title>Ahmad Osman</title>
+    <link rel="stylesheet" href="/Frontend/style/main.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Frontend/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Frontend/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Frontend/assets/favicon-16x16.png">
+    <link rel="manifest" href="/Frontend/assets/site.webmanifest">
 
-    </main>
-    <footer class="footer">
-        <p>AAA Boxing &copy; 2023</p>
-        <div class="footer-nav">
-            <img src="#" alt="instagram">
-            <img src="" alt="youtube">
-            <img src="" alt="linkedin">__
+    
+</head>
+<body >
+    <div class="background-image">
+        <div class="main">
+            <span class="close_login_form">Close</span>  	
+            <input type="checkbox" id="chk" aria-hidden="true">
+    
+            <div class="login">
+                <form>
+                    <label for="chk" aria-hidden="true" class="label_form">Login</label>
+                    <input type="text" id="username"  name="txt" placeholder="User name" class="login_palcHolder" required="">
+                    <input type="password" id="password"  name="pswd" placeholder="Password" class="login_palcHolder" required="">
+                    <button id="login">Login</button>
+                </form>
+            </div>
+    
+                <div class="signup">
+                    <form>
+                        <label for="chk" aria-hidden="true" class="label_form">Sign up</label>
+                        <input type="text" name="firstName" placeholder="First name" required="" class="login_palcHolder-2">
+                        <input type="text" name="lastName" placeholder="Last name" required="" class="login_palcHolder-2">
+                        <input type="text" name="userName" placeholder="User name" required="" class="login_palcHolder-2">
+                        <input type="email" name="email" placeholder="Email" required="" class="login_palcHolder-2">
+                        <input type="password" id="signup-pass" name="pswd" placeholder="Password" required="" class="login_palcHolder-2">
+                        <button id="signup">Sign up</button>
+                    </form>
+                </div>
+        </div>
+        
+    </div>
+        <div class="text_center">
+            <!-- <h1 class="text_center-h1">Ahmad Osman</h1> -->
+            <p class="text_center-p-1">LEARN TO BOX </p>
+            <p class="text_center-p-2">GET FIT WHILE HAVING FUN WITH US</p>
+
+        </div>
+    </div>
+    <header>
+        <div class="site_nav">
+            <div class="container">
+                <div class="nav_wrapper">
+                    <!-- Hamburger menu -->
+                    <div class="hamburger" onclick="toggleMenu()">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                        <ul class="site_nav_ul text_left">
+                            <li class="nav_link">
+                                <a href="/Frontend/index.html" class="menu home">Home</a>
+                            </li>
+                            <li class="nav_link">
+                                <a href="#" class="menu">Skills</a>
+                            </li>
+                            <li class="nav_link">
+                                <a href="#" class="menu booking" id="session">Book a session</a>
+                            </li>
+                        </ul>
+                        <!-- <div class="logo">
+                            <a href="index.html" class="menu_logo">Ahmad Osaman <span class="span">.</span></a>
+                        </div> -->
+                        <ul class="site_nav_ul text_right">
+                            <li class="nav_link">
+                                <a href="#about" class="menu">About</a>
+                            </li>
+                            <li class="nav_link">
+                                <a href="#contact" class="menu" id="contact">Contact</a>
+                            </li>
+                            <!-- <li class="nav_link">
+                                
+                            </li> -->
+                        </ul>
+                </div>
+                <a href="" class="menu" id="login-form">Login</a>
+            </div>
+        </div> 
+    </header>
+    <div class="scroll-downs">
+        <div class="mousey">
+          <div class="scroller"></div>
+        </div>
+        <span class="scrol_text">Scroll</span>
+      </div>
+
+    <article class="info" id="about">
+        <div class="content">
+            <img src="/Frontend/assets/ahmad-4.jpeg" alt="" class="side_photo">
+            <div class="text">
+                <h2 class="red_text">Achieve The Best Results Of Your Life</h2>
+                <p class="info_text">AAA Boxing is a boxing gym located in the heart of the city.
+                    We offer a wide range of boxing classes for all ages and skill levels.</p>
+                <p class="info_text"> Whether you are looking to get in shape, learn self-defense, or compete at the amateur or professional level, 
+                we have something for you! Our trainers are experienced professionals who will help you reach your goals. 
+                Come train with us today!</p>
+            </div>
+        </div>
+    </article>
+    <article class="intro" >
+        <div class="content">
+            <div class="text">
+                <h2 class="red_text" >INTRODUCTION</h2>
+                <p class="info_text">Head coach Ahmad Osman, provides high quality personal and boxing
+                    training. </p>
+                    <p class="info_text">
+                        Certified coach, and Lebanon boxing champion with over 18 years
+                        of experience in boxing and fitness.
+                    </p>
+ 
+                    <p class="info_text">
+                        Ahmad has trained clients all
+                        over the world, from Lebanon to the United States
+                    </p>
+
+                    <!-- <button class="button">FIND OUT MORE</button> -->
+            </div>
+
+            <img src="/Frontend/assets/ahmad_small.png" alt="" class="side_photo">
+        </div>
+    </article>
+    <article class="classes">
+        <div class="content">
+            <img src="/Frontend/assets/ahmad-3.jpeg" alt="" class="side_photo">
+            <div class="text">
+                <h2 class="red_text">Classes</h2>
+
+                <p class="info_text">Ahmad Osman offers a variety of classes for all ages and skill levels. 
+                    Whether you are looking to get in shape, learn self-defense, or compete at the amateur or professional level, 
+                    we have something for you! 
+                    </p>
+                <p class="info_text">
+                    Come train with us today!
+                </p>
+                <!-- <button class="button">Find out more</button> -->
+            </div>
+        </div>
+    </article>
+    <article class="whyBox">
+        <h2 class="red_text">Why Boxing?</h2>
+        <ol>
+            <li>Enhanced cardivascular health</li>
+            <li>Improved total-body strength</li>
+            <li>Better hand-eye coordination</li>
+            <li>Decreased stress</li>
+            <li>Improved body composition</li>
+            <li>Increased self-esteem</li>
+            <li>Improved mental health</li>
+            <li>Improved sleep</li>
+        </ol>
+        <!-- <button class="button"></button> -->
+    </article>
+    <form class="form" action="submit" id="contact">
+        <h2>Contact us</h2>
+        <div class="input-group">
+            <input class="input" required type="text" id="name">
+            <label class="label" for="name">Name</label>
+
+        </div>
+        <div class="input-group">
+            <input class="input" required type="text" id="email">
+            <label class="label" for="email">Email</label>
         </div>
 
-        <p>
-            Copywrite AAA Boxing 2023
-        </p>
-        <p>
-            Web design by <a class="footer-text" href="https://www.linkedin.com/in/alaa-aldandachi/">Alaa Aldandachi</a>
-        </p>
-
+        <div class="input-group-big">
+            <!-- <input class="input-big" required type="text" id="msg"> -->
+            <textarea class="input-big" required type="text" id="msg" name="msg" id="" cols="30" rows="10"></textarea>
+            <label class="label" for="msg">Write your message</label>
+        </div>
+        <button class="button">Submit</button>
+    </form>    
+    
+    <footer>
+        <div class="footer_container">
+            <div class="logo">
+                <a href="index.html">Ahmad Osaman <span class="span">.</span></a>
+            </div>
+            <ul class="footer_links">
+                <li class="nav_link">
+                    <a href="https://www.instagram.com/aaa_boxinggg?igsh=MWRndGV4YnI0djdzbw==" target="_blank">Instagram</a>
+                </li>
+                <li class="nav_link">
+                    <a href="#" target="_blank">Facebook</a>
+                </li>
+                <li class="nav_link">
+                    <a href="#" target="_blank" >Youtube</a>
+                </li>
+            </ul>
+            <div class="copyright">
+                &copy; 2022 Ahmad Osaman. All rights reserved.
+            </div>
+        </div>
     </footer>
+    
+    <script type="module" src="/Frontend/JS/index.js"></script>
+
 </body>
 </html>
