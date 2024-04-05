@@ -1,6 +1,8 @@
 // profile.js
 let menu_login = document.getElementById('login-form');
 let main = document.querySelector('.main');
+import { displayChangePasswordForm } from './passChange.js';
+
 
 menu_login.addEventListener('click', function() {
     let token = localStorage.getItem('token');
@@ -28,13 +30,20 @@ export function displayProfile(userInfo) {
             <p class="user_info"> ${userInfo.email}</p>
             <p class="user_info"> Balance: $(WIP)</p>
             <button class="user_info" id="edit">Edit info</button>
-            <button class="user_info">Change Password</button>
+            <button class="user_info" id="changePassword">Change Password</button>
             <button id="logout" class="user_info">Logout</button>
             </div>
             `;
         main.appendChild(close);
         main.classList.remove('slideUp'); // Remove the slideUp class
         main.classList.add('slideDown'); // Add the slideDown class
+        const changePasswordButton = document.getElementById('changePassword');
+        if (changePasswordButton) {
+            changePasswordButton.addEventListener('click', displayChangePasswordForm);
+        } else {
+            console.error("Element with id 'changePassword' not found");
+        }
+
     }
 }
 

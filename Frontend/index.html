@@ -29,9 +29,11 @@
                 <div class="signup">
                     <form>
                         <label for="chk" aria-hidden="true" class="label_form">Sign up</label>
-                        <input type="text" name="txt" placeholder="User name" required="" class="login_palcHolder-2">
+                        <input type="text" name="firstName" placeholder="First name" required="" class="login_palcHolder-2">
+                        <input type="text" name="lastName" placeholder="Last name" required="" class="login_palcHolder-2">
+                        <input type="text" name="userName" placeholder="User name" required="" class="login_palcHolder-2">
                         <input type="email" name="email" placeholder="Email" required="" class="login_palcHolder-2">
-                        <input type="password" name="pswd" placeholder="Password" required="" class="login_palcHolder-2">
+                        <input type="password" id="signup-pass" name="pswd" placeholder="Password" required="" class="login_palcHolder-2">
                         <button id="signup">Sign up</button>
                     </form>
                 </div>
@@ -62,7 +64,7 @@
                                 <a href="#" class="menu">Skills</a>
                             </li>
                             <li class="nav_link">
-                                <a href="#" class="menu booking">Book a session</a>
+                                <a href="#" class="menu booking" id="session">Book a session</a>
                             </li>
                         </ul>
                         <!-- <div class="logo">
@@ -73,13 +75,14 @@
                                 <a href="#about" class="menu">About</a>
                             </li>
                             <li class="nav_link">
-                                <a href="#contact" class="menu">Contact</a>
+                                <a href="#contact" class="menu" id="contact">Contact</a>
                             </li>
-                            <li class="nav_link">
-                                <a href="" class="menu" id="login-form">Login</a>
-                            </li>
+                            <!-- <li class="nav_link">
+                                
+                            </li> -->
                         </ul>
                 </div>
+                <a href="" class="menu" id="login-form">Login</a>
             </div>
         </div> 
     </header>
@@ -175,8 +178,7 @@
         </div>
         <button class="button">Submit</button>
     </form>    
-
-
+    
     <footer>
         <div class="footer_container">
             <div class="logo">
@@ -197,7 +199,8 @@
                 &copy; 2022 Ahmad Osaman. All rights reserved.
             </div>
         </div>
-    </footer>
+    </footer>    
     <script type="module" src="/Frontend/JS/index.js"></script>
+
 </body>
 </html>

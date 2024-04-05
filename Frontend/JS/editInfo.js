@@ -1,25 +1,29 @@
-export async function changeUserInfo(firstName, lastName, email, token) {
+import { displayProfile } from "./profile.js";
+export async function changeUserInfo(event, firstName, lastName, email) {
     const url = 'https://tjokvdi035.execute-api.eu-north-1.amazonaws.com/api/auth/changeInfo';
     let body = {};
-
+    //body.userName = event.userName;
     if (firstName) body.firstName = firstName;
     if (lastName) body.lastName = lastName;
     if (email) body.email = email;
+    //console.log(event.token);
 
     const options = {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}` // assuming you're using Bearer token for authentication
+            'Authorization': `Bearer ${event.token}` // assuming you're using Bearer token for authentication
         },
         body: JSON.stringify(body)
     };
 
     const response = await fetch(url, options);
+    //console.log("TEST")
     const data = await response.json();
-    console.log(data);
+    //console.log("Error",data);
 
     if (!response.ok) {
+        //console.log("Error",data);
         throw new Error(data.error);
     }
 
@@ -57,17 +61,68 @@ export function displayEditForm() {
 // When clicking on the submit button, call the changeUserInfo function
 document.querySelector('.main').addEventListener('click', async (e) => {
     if (e.target.id === 'submit') {
+        e.stopPropagation(); // Stop the click event from propagating up to the document level
+
         let token = localStorage.getItem('token');
         let firstName = document.getElementById('firstName').value;
         let lastName = document.getElementById('lastName').value;
         let email = document.getElementById('email').value;
-        console.log(token)
+
+        // Create an event object
+        let event = {
+            userName: localStorage.getItem('username'),
+            token: token
+        };
 
         try {
-            let data = await changeUserInfo( firstName, lastName, email, token);
-            console.log(data);
+            let data = await changeUserInfo(event, firstName, lastName, email);
+
+            // If the request is successful, update the local storage
+            let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            if (firstName) userInfo.firstName = firstName;
+            if (lastName) userInfo.lastName = lastName;
+            if (email) userInfo.email = email;
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+            // Display a success message
+            let main = document.querySelector('.edit_info');
+            main.innerHTML = '<p>Info has been updated successfully!</p>';
+
+            // Wait for 1 second, then fade back to the profile
+            setTimeout(() => {
+                main.style.transition = 'opacity 1s';
+                //main.style.opacity = 0;
+                setTimeout(() => {
+                    // Display the profile here
+                    // You need to implement the displayProfile function
+                    displayProfile(userInfo);
+                    main.style.transition = 'opacity 1s';
+                    //main.style.opacity = 1;
+                }, 1000);
+            }, 1000);
         } catch (error) {
             console.error(error);
         }
     }
 });
+
+// Closes the edit form when clicking on the cancel button
+document.addEventListener('click', function(e) {
+    let main = document.querySelector('.main');
+    let button = document.getElementById('login-form');
+    let submitButton = document.getElementById('submit');
+    let editButton = document.getElementById('edit'); // Get the 'edit' button
+
+    // Check if the clicked target is outside of the .main element and not the 'submit' button or within the 'edit' button
+    if (!main.contains(e.target) && e.target !== submitButton && !editButton.contains(e.target)) {
+        // Close the .main element
+        main.style.display = 'none';
+    }
+
+    // Check if the clicked target is the button
+    if (button.contains(e.target)) {
+        // Open the .main element
+        main.style.display = 'block';
+    }
+});
+

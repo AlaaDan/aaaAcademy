@@ -618,7 +618,8 @@ input{
 	background: white;
 	justify-content: center;
 	display: flex;
-	margin: 10px auto;
+  frontEnd_home_page
+	margin: 4px auto;
 	padding: 10px;
 	border: none;
 	outline: none;
@@ -627,7 +628,7 @@ input{
 button{
 	width: 60%;
 	height: 40px;
-	margin: 10px auto;
+	margin: 0px auto;
 	justify-content: center;
 	display: block;
 	color: #fff;
@@ -650,15 +651,22 @@ button:hover{
 	border-radius: 60% /5%;
 	transform: translateY(-180px);
 	transition: .8s ease-in-out;
-
 }
+
+.msg{
+    text-align: center;
+    margin-top: 5px;
+    padding: 0 5px;
+}
+
 .signup label{
 	color: white;
 	transform: scale(.6);
 }
 
 #chk:checked ~ .signup{
-	transform: translateY(-500px);
+	transform: translateY(-580px);
+
 }
 #chk:checked ~ .signup label{
 	transform: scale(1);
@@ -690,6 +698,15 @@ button:hover{
     text-align: center;
     position: relative;
     top: 5%;
+}
+.changePass-h4{
+    color: #e30613;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    top: 5%;
+
 }
 
 .main-2, .edit_info{
