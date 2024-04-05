@@ -618,6 +618,7 @@ input{
 	background: white;
 	justify-content: center;
 	display: flex;
+  frontEnd_home_page
 	margin: 4px auto;
 	padding: 10px;
 	border: none;
@@ -650,9 +651,7 @@ button:hover{
 	border-radius: 60% /5%;
 	transform: translateY(-180px);
 	transition: .8s ease-in-out;
-
 }
-
 
 .msg{
     text-align: center;
@@ -667,6 +666,7 @@ button:hover{
 
 #chk:checked ~ .signup{
 	transform: translateY(-580px);
+
 }
 #chk:checked ~ .signup label{
 	transform: scale(1);

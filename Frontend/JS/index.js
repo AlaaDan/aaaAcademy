@@ -30,4 +30,3 @@ document.getElementById("session").addEventListener("click", function() {
     document.querySelector('.calender').style.display = 'block';
     document.querySelector('.calender').classList.add('fadeIn');
 });
-

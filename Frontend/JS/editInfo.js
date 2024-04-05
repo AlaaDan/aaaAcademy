@@ -25,7 +25,6 @@ export async function changeUserInfo(event, firstName, lastName, email) {
     if (!response.ok) {
         //console.log("Error",data);
         throw new Error(data.error);
-        
     }
 
     return data;
@@ -126,3 +125,4 @@ document.addEventListener('click', function(e) {
         main.style.display = 'block';
     }
 });
+

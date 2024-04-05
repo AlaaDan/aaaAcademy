@@ -3,6 +3,7 @@ let menu_login = document.getElementById('login-form');
 let main = document.querySelector('.main');
 import { displayChangePasswordForm } from './passChange.js';
 
+
 menu_login.addEventListener('click', function() {
     let token = localStorage.getItem('token');
     if (token) {
@@ -42,6 +43,7 @@ export function displayProfile(userInfo) {
         } else {
             console.error("Element with id 'changePassword' not found");
         }
+
     }
 }
 
